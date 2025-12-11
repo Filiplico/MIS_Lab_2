@@ -6,6 +6,8 @@ import '../models/category.dart';
 import '../services/category_service.dart';
 import '../widgets/category_card.dart';
 import 'meals_screen.dart';
+import 'favorites_screen.dart';
+import 'notification_settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -51,13 +53,33 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         actions: [
           IconButton(
+            icon: const Icon(Icons.notifications),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const NotificationSettingsScreen(),
+                ),
+              );
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.favorite),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const FavoritesScreen(),
+                ),
+              );
+            },
+          ),
+          IconButton(
             icon: const Icon(Icons.shuffle),
             onPressed: () async {
-              // Load random meal
               final service = MealDetailService();
               final randomMeal = await service.fetchRandomMeal();
 
-              // Navigate to detail screen
               Navigator.push(
                 context,
                 MaterialPageRoute(
